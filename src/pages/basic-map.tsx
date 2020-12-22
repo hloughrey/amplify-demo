@@ -1,16 +1,25 @@
 import React, { ReactElement } from 'react';
-import styles from '../pages-lib/basic-map/basic-map.module.scss';
-import { Map } from '../components';
+import loadable from '@loadable/component';
 
-export default function Home(): ReactElement {
+import { Layout, Seo } from '../components';
+import {
+    StyledContainer,
+    StyledMapContainer,
+} from '../pages-lib/basic-map/basic-map.styles.ts';
+
+const Map = loadable(() =>
+    import('../components').then(modules => modules.Map)
+);
+
+export default function BasicMap(): ReactElement {
     return (
-        <div className={styles.container}>
-            <main className={styles.main}>
-                <h2>Hello World</h2>
-                <Map />
-            </main>
-
-            <footer className={styles.footer}></footer>
-        </div>
+        <Layout>
+            <Seo title="Basic Map" />
+            <StyledContainer>
+                <StyledMapContainer>
+                    <Map />
+                </StyledMapContainer>
+            </StyledContainer>
+        </Layout>
     );
 }

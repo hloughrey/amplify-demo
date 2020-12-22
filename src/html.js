@@ -9,7 +9,7 @@ export default function HTML(props) {
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta
                     name="viewport"
-                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                    content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
                 <link
                     rel="stylesheet"
@@ -22,9 +22,13 @@ export default function HTML(props) {
                     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                     crossOrigin=""
                 ></script>
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                />
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes}>
+            <body {...props.bodyAttributes} style={{ margin: '0' }}>
                 {props.preBodyComponents}
                 <div
                     key={`body`}
