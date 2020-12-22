@@ -8,8 +8,10 @@
 import React, { PropsWithChildren, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
-import { StyledContainer, StyledMain } from './layout.styles';
 
+import { GlobalStyle } from '../../styles/global.styles';
+
+import { StyledContainer, StyledMain } from './layout.styles';
 import { Header, Footer } from '../../components';
 
 export function Layout({ children }: PropsWithChildren<{}>): ReactElement {
@@ -25,6 +27,7 @@ export function Layout({ children }: PropsWithChildren<{}>): ReactElement {
 
     return (
         <StyledContainer>
+            <GlobalStyle />
             <Header />
             <StyledMain>{children}</StyledMain>
             <Footer />
