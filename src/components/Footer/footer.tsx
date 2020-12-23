@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Typography, Container, Link } from '@material-ui/core';
 
-import { useStyles } from './footer.styles';
+import { StyledFooter } from './footer.styles';
 
 function Copyright() {
     return (
@@ -17,10 +17,8 @@ function Copyright() {
 }
 
 export function Footer(): ReactElement {
-    const { footer } = useStyles();
-
     return (
-        <footer className={footer}>
+        <StyledFooter>
             <Container maxWidth="lg">
                 <Typography variant="h6" align="center" gutterBottom>
                     Footer
@@ -35,6 +33,6 @@ export function Footer(): ReactElement {
                 </Typography>
                 <Copyright />
             </Container>
-        </footer>
+        </StyledFooter>
     );
 }

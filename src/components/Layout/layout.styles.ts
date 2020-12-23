@@ -9,5 +9,5 @@ export const StyledContainer = styled.div`
 
 export const StyledMain = styled.main`
     flex: 1;
-    padding: 16px;
+    padding: ${({ theme }) => theme.spacing(2)}px;
 `;

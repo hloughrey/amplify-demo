@@ -1,15 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+import { AppBar, Link } from '@material-ui/core';
 
-export const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        marginBottom: theme.spacing(2),
-    },
-    foobar: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
-    },
-    logo: {
-        flexGrow: 1,
-    },
-}));
+export const StyledAppBar = styled(AppBar)`
+    padding-top: ${({ theme }) => theme.spacing(2)}px;
+    padding-bottom: ${({ theme }) => theme.spacing(2)}px;
+`;
+
+export const StyledLink = styled(Link)`
+    flex-grow: 1;
+`;
