@@ -5,6 +5,13 @@ import { PageContainer } from '../../components';
 export const StyledPageContainer = styled(PageContainer)`
     display: flex;
     flex-direction: column;
+    padding: ${({ theme }) => theme.spacing(2)}px;
+
+    @media screen and (min-width: ${({ theme }) =>
+            `${theme.breakpoints.values.sm}px`}) {
+        padding-left: ${({ theme }) => theme.spacing(3)}px;
+        padding-right: ${({ theme }) => theme.spacing(3)}px;
+    }
 `;
 
 export const StyledMapContainer = styled.div`

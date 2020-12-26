@@ -9,11 +9,4 @@ export const StyledContainer = styled.div`
 
 export const StyledMain = styled.main`
     flex: 1;
-    padding: ${({ theme }) => theme.spacing(2)}px;
-
-    @media screen and (min-width: ${({ theme }) =>
-            `${theme.breakpoints.values.sm}px`}) {
-        padding-left: ${({ theme }) => theme.spacing(3)}px;
-        padding-right: ${({ theme }) => theme.spacing(3)}px;
-    }
 `;
