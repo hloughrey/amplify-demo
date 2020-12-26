@@ -1,0 +1,28 @@
+import { ThemeProvider } from 'styled-components';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import 'jest-styled-components';
+
+import { defaultTheme } from '@pb/styles';
+import { setup } from '@pb/jest-helpers';
+import { {{pascalCase name}} } from '.';
+import { T{{pascalCase name}}Properties } from './{{kebabCase name}}.types';
+
+describe(`{{pascalCase name}}`, () => {
+    const partialProperties = setup<T{{pascalCase name}}Properties>({});
+
+    it('should do something', () => {
+        const properties = partialProperties();
+
+        render(
+            <ThemeProvider theme={defaultTheme}>
+                <{{pascalCase name}} {...properties} />
+            </ThemeProvider>
+        );
+
+        expect(
+            screen.getByText(`Hello, I'm your new {{pascalCase name}} component 👋`)
+        ).toBeInTheDocument();
+    });
+});

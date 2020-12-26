@@ -1,0 +1,15 @@
+const withPlugins = require('next-compose-plugins');
+const withSourceMaps = require('@zeit/next-source-maps');
+
+const nextConfig = {
+    basePath: '/{{kebabCase baseUrl}}',
+};
+
+const _withSourceMaps = [
+    withSourceMaps,
+    {
+        webpack: (config, options) => config,
+    },
+];
+
+module.exports = withPlugins([_withSourceMaps, nextConfig]);

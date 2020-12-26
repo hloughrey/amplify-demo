@@ -1,0 +1,23 @@
+module.exports = {
+    displayName: '{{kebabCase applicationDirectory}}',
+    preset: '../../jest.preset.js',
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+    transform: {
+        '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
+        '^.+\\.[tj]sx?$': 'ts-jest',
+        '^.+\\.svg$':
+            '<rootDir>/../../libs/jest-helpers/src/lib/svg-transform/index.js',
+    },
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
+    coverageDirectory: '../../coverage/apps/{{kebabCase applicationDirectory}}',
+    coveragePathIgnorePatterns: [],
+    coverageThreshold: {
+        global: {
+            statements: 100,
+            branches: 100,
+            functions: 100,
+            lines: 100,
+        },
+    },
+    globals: { 'ts-jest': { tsConfig: '<rootDir>/tsconfig.spec.json' } },
+};

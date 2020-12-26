@@ -1,0 +1,34 @@
+replicaCount: 3
+maxReplicaCount: 10
+image:
+  useImagePullSecrets: false
+  pullPolicy: Always
+service:
+  internalPort: 3000
+  externalPort: 80
+ingress:
+  enabled: true
+resources:
+  requests:
+     cpu: 100m
+     memory: 50Mi
+  limits:
+     cpu: 200m
+     memory: 100Mi
+frontdoor:
+  enabled: true
+environment: __APPCONFIG_ENVIRONMENT__
+
+frontendEndpointNames : 
+- __APPCONFIG_FRONTDOOR_FRONTENDNAME__
+
+currentReleaseVersion: __BUILD_BUILDNUMBER__
+logEntries: __APPCONFIG_FRONTEND_LOGENTRIES_TOKEN__
+basicauthEnabled: __APPCONFIG_FRONTEND_BASICAUTHENABLED__
+basicauthRealm: __APPCONFIG_FRONTEND_BASICAUTHRELM__
+basicauthUser: __APPCONFIG_FRONTEND_BASICAUTHUSER__
+basicauthPassword: __APPCONFIG_FRONTEND_BASICAUTHPASSWORD__
+# armAuth:
+#     type: aadPodIdentity
+#     identityResourceID: __APPCONFIG_IDENTITY_RESOURCEID__
+#     identityClientID: __APPCONFIG_IDENTITY_CLIENTID__

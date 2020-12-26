@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: \{{ template "fullname" . }}
+  labels:
+    app: \{{ template "fullname" . }}
+    chart: "\{{ .Chart.Name }}-\{{ .Chart.Version | replace "+" "_" }}"
+    release: "\{{ .Release.Name }}"
+    heritage: "\{{ .Release.Service }}"
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  replicas: \{{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: \{{ template "fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: \{{ template "fullname" . }}
+    spec:
+\{{ if .Values.image.useImagePullSecrets }}
+      imagePullSecrets:
+        - name: \{{ .Chart.Name }}-acr-secret
+\{{ end }}
+      terminationGracePeriodSeconds: 101
+      containers:
+      - name: \{{ .Chart.Name }}
+        image: "\{{ .Values.image.repository }}:\{{ .Chart.AppVersion }}"
+        imagePullPolicy: \{{ .Values.image.pullPolicy }}
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sleep","90"]
+        livenessProbe:
+          httpGet:
+            path: /{{kebabCase baseUrl}}/heartbeat
+            port: \{{ .Values.service.internalPort }}
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /{{kebabCase baseUrl}}/heartbeat
+            port: \{{ .Values.service.internalPort }}
+          periodSeconds: 3
+          initialDelaySeconds: 5
+          timeoutSeconds: 3
+        resources:
+\{{ toYaml .Values.resources | indent 12 }}
+        env:
+          - name: ENVIRONMENT
+            value: \{{ .Values.environment }}
+          - name: CURRENT_RELEASE_VERSION
+            value: {{ .Values.currentReleaseVersion }}
+          - name: LOGENTRIES_TOKEN
+            value: {{ .Values.logEntries }}
+          - name: BASICAUTH_ENABLED
+            value: {{ quote .Values.basicauthEnabled }}
+          - name: BASICAUTH_REALM
+            value: {{ .Values.basicauthRealm }}
+          - name: BASICAUTH_USER
+            value: {{ .Values.basicauthUser }}
+          - name: BASICAUTH_PASSWORD
+            value: {{ .Values.basicauthPassword}}

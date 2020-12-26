@@ -1,0 +1,29 @@
+import React, { Fragment } from 'react';
+
+import { ignoreStory, storyDescription } from '@pb/storybook-helpers';
+import { Paragraph } from '@pb/shared-components';
+import { {{pascalCase name}} } from '.';
+
+export default {
+    title: 'Components|{{pascalCase name}}',
+    component: {{pascalCase name}},
+    parameters: {
+        componentSubtitle: `Enter a subtitle here.`,
+    },
+};
+
+export const Basic = () => <{{pascalCase name}} />;
+
+export const WithContext = () => (
+    <Fragment>
+        <Paragraph>Meaningful text</Paragraph>
+        <{{pascalCase name}} />
+        <Paragraph>More meaningful text</Paragraph>
+    </Fragment>
+);
+WithContext.story = storyDescription(
+    'This example includes the component wrapped between two paragraph elements'
+);
+
+export const ControlledWithKnobs = () => <{{pascalCase name}} />;
+ControlledWithKnobs.story = ignoreStory();

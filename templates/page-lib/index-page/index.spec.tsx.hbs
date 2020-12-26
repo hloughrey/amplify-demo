@@ -1,0 +1,33 @@
+import { ThemeProvider } from 'styled-components';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import 'jest-styled-components';
+
+import { defaultTheme } from '@pb/styles';
+import Index, { getServerSideProps } from '../../pages';
+
+describe('Index', () => {
+    it('should display the correct title', () => {
+        render(
+            <ThemeProvider theme={defaultTheme}>
+                <Index />
+            </ThemeProvider>
+        );
+
+        expect(
+            screen.getByText('Welcome to the new {{kebabCase applicationDirectory}} application!')
+        ).toBeInTheDocument();
+    });
+
+    describe('getServerSideProps function', () => {
+        it('should return the environment variables', async () => {
+            const {
+                props: { environment },
+            } = await getServerSideProps();
+            const expected = ['development', 'qa', 'production'];
+
+            expect(expected).toContain(environment?.environment);
+        });
+    });
+});

@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: \{{ template "fullname" . }}
+    labels:
+        app: \{{ template "fullname" . }}
+        chart: "\{{ .Chart.Name }}-\{{ .Chart.Version | replace "+" "_" }}"
+        release: "\{{ .Release.Name }}"
+        heritage: "\{{ .Release.Service }}"
+    annotations:
+        kubernetes.io/ingress.class: azure/application-gateway
+        appgw.ingress.kubernetes.io/appgw-ssl-certificate: appGatewaySslCert
+        # appgw.ingress.kubernetes.io/backend-protocol: "https"
+        appgw.ingress.kubernetes.io/connection-draining: "true"
+        appgw.ingress.kubernetes.io/connection-draining-timeout: "30"
+        appgw.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+    rules:
+        - http:
+              paths:
+                  - path: /{{kebabCase baseUrl}}
+                    backend:
+                        serviceName: \{{ template "fullname" . }}
+                        servicePort: \{{ .Values.service.externalPort }}
+                  - path: /{{kebabCase baseUrl}}/*
+                    backend:
+                        serviceName: \{{ template "fullname" . }}
+                        servicePort: \{{ .Values.service.externalPort }}

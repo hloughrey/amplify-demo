@@ -1,0 +1,14 @@
+import React, { ReactElement } from 'react';
+
+import { T{{pascalCase name}}Properties } from './{{kebabCase name}}.types';
+import { Styled{{pascalCase name}} } from './{{kebabCase name}}.styled';
+
+export function {{pascalCase name}}({
+    componentName = '{{pascalCase name}}'
+}: T{{pascalCase name}}Properties): ReactElement {
+    return (
+        <Styled{{pascalCase name}}>
+            Hello, I'm your new {componentName} component 👋
+        </Styled{{pascalCase name}}>
+    );
+}

@@ -1,0 +1,32 @@
+import React, { ReactElement } from 'react';
+
+import { getEnvironmentSettings, TEnvironmentSettings } from '@pb/services';
+import {
+    TIndexPageProperties,
+    TServerSidePageProperties,
+} from '../page-lib/index-page';
+import { EnvironmentContext } from '../context';
+import { indexPageText } from '../configuration';
+import { Layout } from '../components/organisms/Layout';
+
+export default function Index({
+    environment,
+}: TIndexPageProperties): ReactElement {
+    const { heading, pageTitle } = indexPageText;
+
+    return (
+        <EnvironmentContext.Provider
+            value={environment as TEnvironmentSettings}
+        >
+            <Layout pageTitle={pageTitle}>
+                <h1>{heading}</h1>
+            </Layout>
+        </EnvironmentContext.Provider>
+    );
+}
+
+export async function getServerSideProps(): Promise<TServerSidePageProperties> {
+    return {
+        props: { environment: getEnvironmentSettings() },
+    };
+}

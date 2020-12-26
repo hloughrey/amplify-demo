@@ -1,0 +1,5 @@
+{
+    "plugins": ["jest-dom"],
+    "extends": ["plugin:@nrwl/nx/react", "../../.eslintrc.json"],
+    "ignorePatterns": ["!**/*"]
+}

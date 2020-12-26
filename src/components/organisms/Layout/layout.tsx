@@ -9,10 +9,10 @@ import React, { PropsWithChildren, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { GlobalStyle } from '../../styles/global.styles';
+import { GlobalStyle } from '../../../styles/global.styles';
 
 import { StyledContainer, StyledMain } from './layout.styles';
-import { Header, Footer } from '../../components';
+import { Header, Footer } from '../..';
 
 export function Layout({ children }: PropsWithChildren<{}>): ReactElement {
     const data = useStaticQuery(graphql`

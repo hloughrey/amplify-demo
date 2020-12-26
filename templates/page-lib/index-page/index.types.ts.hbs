@@ -1,0 +1,12 @@
+import { TEnvironmentSettings, TPageEnvironmentProperties } from '@pb/services';
+
+export type TIndexPageProperties = TPageEnvironmentProperties & {
+    propertyId?: string;
+    error?: boolean;
+};
+
+export type TServerSidePageProperties = {
+    props: {
+        environment: TEnvironmentSettings;
+    };
+};

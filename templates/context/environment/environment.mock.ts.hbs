@@ -1,0 +1,8 @@
+import { baseMockEnvironment, TEnvironmentSettings } from '@pb/services';
+
+const appSpecificMockEnvironment = {};
+
+export const mockEnvironment: TEnvironmentSettings = {
+    ...baseMockEnvironment,
+    ...appSpecificMockEnvironment,
+};

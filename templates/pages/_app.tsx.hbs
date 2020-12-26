@@ -1,0 +1,36 @@
+import { ThemeProvider } from 'styled-components';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import App from 'next/app';
+
+import { GlobalStyle, defaultTheme } from '@pb/styles';
+import { AppInsights } from '@pb/services';
+import { hasWindow } from '@pb/helpers';
+import { applicationVersion } from '@pb/configuration';
+
+// @ts-ignore
+// eslint-disable-next-line no-template-curly-in-string
+if ('${ENVIRONMENT}' !== 'production' && typeof document !== 'undefined') {
+    const axe = require('react-axe');
+    axe(React, ReactDOM, 1000);
+}
+
+export default class {{pascalCase applicationDirectory}} extends App {
+    render() {
+        const { Component, pageProps } = this.props;
+
+        if (hasWindow()) {
+            AppInsights.initialiseAppInsights(
+                '{{pascalCase applicationDirectory}}',
+                applicationVersion
+            );
+        }
+
+        return (
+            <ThemeProvider theme={defaultTheme}>
+                <GlobalStyle />
+                <Component {...pageProps} />
+            </ThemeProvider>
+        );
+    }
+}

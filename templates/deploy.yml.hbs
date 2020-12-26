@@ -1,0 +1,28 @@
+resources:
+  pipelines:
+  - pipeline: upstreampipleine   # Name of the pipeline resource
+    source: fe-mono-nx-apps  # Name of the triggering pipeline
+    trigger:
+       branches:
+         include:
+           - master
+
+  repositories:
+    - repository: templates
+      type: git
+      name: DevOps\pipeline-templates
+
+trigger:
+- none
+
+pr: none
+
+variables:
+  applicationName: {{applicationDirectory}}
+
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+- template: /Application/nx/deploy-nx-app.yml@templates
+  parameters:
+    applicationName: $(applicationName)

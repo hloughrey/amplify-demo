@@ -1,0 +1,4 @@
+apiVersion: v1
+description: {{pascalCase applicationDirectory}} Application
+name: {{applicationDirectory}}
+version: v1.0.0

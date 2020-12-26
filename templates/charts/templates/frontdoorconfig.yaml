@@ -1,0 +1,13 @@
+\{{ if .Values.frontdoor.enabled }}
+apiVersion: "frontdoor.azure.io/v1"
+kind: FrontdoorConfiguration
+metadata:
+  name: \{{ .Chart.Name }}-config
+spec:
+  ingressName: \{{ template "fullname" . }}
+  deploymentName: \{{ template "fullname" . }}
+  frontendEndpoints:
+  \{{- range .Values.frontendEndpointNames }}
+  - \{{.}}
+  \{{- end }}
+\{{ end }}
