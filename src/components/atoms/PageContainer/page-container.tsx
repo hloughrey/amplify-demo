@@ -7,7 +7,7 @@ export function PageContainer({
     className,
 }: PropsWithChildren<null>): ReactElement {
     return (
-        <StyledPageContainer className={className} maxWidth="lg">
+        <StyledPageContainer className={className}>
             {children}
         </StyledPageContainer>
     );
